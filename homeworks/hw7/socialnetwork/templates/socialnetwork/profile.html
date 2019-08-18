@@ -1,0 +1,50 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block title %} My Profile {% endblock %}
+
+{% block user-info %}
+    <div class="dropdown">
+        <button class="dropbtn"><span id="id_logged_in_user_name">{{user.first_name}} {{user.last_name}}</span></button>
+        <div class="dropdown-content">
+            <a id="id_nav_global_stream" href="{% url 'global_stream' %}">Global Stream</a>
+            <a id="id_nav_follower_stream" href="{% url 'follower_stream' %}">Follower Stream</a>
+            <a id="id_nav_profile" href="{% url 'profile' %}">My Profile</a>
+            <a id="id_nav_logout" href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div> 
+{% endblock %}
+
+{% block content %}
+    <div class="profile">
+        <p>Profile Page for <span id="id_user_name">{{profile.user.first_name}} {{profile.user.last_name}}</span></p>
+
+        {% if profile.profile_picture %}
+            <img src="{% url 'get_photo' profile.user.id %}" id="id_user_picture" alt="Profile Picture"><br>
+        {% else %}
+            {% load staticfiles %}
+            <img src="{% static 'socialnetwork/husky.jpg' %}" id="id_user_picture" alt="Default Profile Picture"><br>
+        {% endif %}
+
+        <form class="upload" method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
+            <textarea class="bio" id="id_bio_text" name="bio">{{profile.bio}}</textarea>
+            <table>
+                <tr>
+                    <td>Profile Picture: {{form.profile_picture}}</td>
+                </tr>
+                <tr>
+                    <td><input id="id_update_profile_button" type="submit"></td>
+                </tr>
+            </table>
+            {% csrf_token %}
+        </form>
+
+        <div class="upload">
+            You are following: <br>
+            <ul>
+                {% for follower in profile.followers.all %}
+                    <li><a class="navlink" id="id_profile_link_{{follower.username}}" href="{% url 'follower' follower.id %}"><i>{{follower.first_name}} {{follower.last_name}}</i></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

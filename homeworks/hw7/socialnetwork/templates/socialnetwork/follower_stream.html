@@ -1,0 +1,25 @@
+{% extends "socialnetwork/base.html" %}
+{% block title %} Follower Stream {% endblock %}
+
+{% block user-info %}
+    <div class="dropdown">
+        <button class="dropbtn"><span id="id_logged_in_user_name">{{user.first_name}} {{user.last_name}}</span></button>
+        <div class="dropdown-content">
+            <a id="id_nav_global_stream" href="{% url 'global_stream' %}">Global Stream</a>
+            <a id="id_nav_follower_stream" href="{% url 'follower_stream' %}">Follower Stream</a>
+            <a id="id_nav_profile" href="{% url 'profile' %}">My Profile</a>
+            <a id="id_nav_logout" href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div> 
+{% endblock %}
+
+{% block content %}
+    {% load staticfiles %}
+    <script src="{% static 'socialnetwork/follower.js' %}" type="text/javascript"></script>
+    <div class="stream">
+        <p>Follower Stream</p>
+
+        <ol id="id_post_list"></ol>
+
+    </div>
+{% endblock %}

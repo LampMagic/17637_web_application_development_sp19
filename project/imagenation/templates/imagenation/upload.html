@@ -1,0 +1,31 @@
+{% extends "imagenation/base.html" %}
+
+{% load addcss %}
+
+{% block user-info %}
+    <a href="#" class="navbar-text" data-toggle="dropdown"> {{user.first_name}} {{user.last_name}} <b class="caret"></b></a>
+    <ul class="dropdown-menu">     
+        <li><a href="{% url 'upload_photo' %}"><span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+        <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+        <li><a href="{% url 'society' %}"><span class="glyphicon glyphicon-th-large"></span> ImageNation</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}    
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h3 class="col">The Magic Begins Here...</h3>
+            <form method="post" action="{% url 'upload_photo' %}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <p>Upload the photo you want to edit:</p>
+                    <p>{{form.photo}}</p>
+                    <p><input id="upload_photo_button" type="submit" value="Upload Photo"></p>
+                </div>
+                {% csrf_token %}
+            </form>            
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+{% endblock %}

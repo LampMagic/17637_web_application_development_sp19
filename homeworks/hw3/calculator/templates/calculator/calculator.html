@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>calculator</title>
+		<link rel="stylesheet" type="text/css" href="/static/calculator/calculator.css">
+	</head>
+
+	<body>
+		<form action="calculator" method="POST">
+
+			<div>
+				<input type="hidden" id="calc-val" name="prev_val" value="{{prev_val}}">
+				<input type="hidden" id="calc-op" name="prev_op" value="{{prev_op}}">
+				<input type="hidden" id="calc-reset" name="reset" value="{{reset}}">
+
+				<input type="text" readonly="readonly" id="calc-display" name="disp" class="display" value="{{disp}}" autocomplete="off">
+			</div>
+
+			<div>
+				<button name="button" type="submit" id="calc-key-7" class="num_button" value="7">7</button><button name="button" type="submit" id="calc-key-8" class="num_button" value="8">8</button><button name="button" type="submit" id="calc-key-9" class="num_button" value="9">9</button><button name="button" type="submit" id="calc-plus" class="ops_button" value="plus">&plus;</button>
+			</div>
+			
+			<div>
+				<button name="button" type="submit" id="calc-key-4" class="num_button" value="4">4</button><button name="button" type="submit" id="calc-key-5" class="num_button" value="5">5</button><button name="button" type="submit" id="calc-key-6" class="num_button" value="6">6</button><button name="button" type="submit" id="calc-minus" class="ops_button" value="minus">&minus;</button>
+			</div>
+
+			<div>
+				<button name="button" type="submit" id="calc-key-1" class="num_button" value="1">1</button><button name="button" type="submit" id="calc-key-2" class="num_button" value="2">2</button><button name="button" type="submit" id="calc-key-3" class="num_button" value="3">3</button><button name="button" type="submit" id="calc-times" class="ops_button" value="times">&times;</button>
+			</div>
+			
+			<div class="special">
+				<button name="button" type="submit" id="calc-key-0" class="num_button" value="0">0</button><button name="button" type="submit" id="calc-equals" class="ops_button" value="equals">&equals;</button><button name="button" type="submit" id="calc-divide" class="ops_button" value="divide">&divide;</button>
+			</div>
+
+			{% csrf_token %} 
+		</form>
+	</body>
+</html>

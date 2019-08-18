@@ -1,0 +1,27 @@
+h1 {
+    font-size: 250%;
+    padding: 30px;
+}
+
+
+a {
+    text-decoration: none;
+    font-size: x-large;
+}
+
+a:hover {
+    background-color: lightgray;
+}
+
+label, input {
+    font-size: xx-large;
+}
+
+
+form {
+    padding: 50px;
+}
+
+.error {
+    color: red;
+}

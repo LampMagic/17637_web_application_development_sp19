@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta property="og:url" content="http://127.0.0.1/imagenation/"/>
+		<meta property="og:type" content="website"/>
+		<meta property="og:title" content="ImageNation"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		{% load staticfiles %}
+		<title> {% block title %} ImageNation {% endblock %} </title>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<img alt="Brand" src="{% static 'imagenation/logo.jpg' %}" height="100">
+				</div>
+
+				<div class="navbar-right">
+					{% block user-info %}
+					{% endblock %}
+				</div>	
+			</div>
+		</nav>
+		<div class="container">
+			<div class="container-fluid">
+				{% block search-bar %}
+				{% endblock %}
+			</div>
+		</div>
+
+		<div class="container">
+			{% if message %}
+				<h4 style="color:green">
+					{{message}}
+				</h4>
+			{% endif %}
+		</div>
+
+		<div class="container">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

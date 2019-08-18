@@ -1,0 +1,53 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block title %} Follower Stream {% endblock %}
+
+{% block user-info %}
+    <div class="dropdown">
+        <button class="dropbtn"><span id="id_logged_in_user_name">{{user.first_name}} {{user.last_name}}</span></button>
+        <div class="dropdown-content">
+            <a id="id_nav_global_stream" href="{% url 'global_stream' %}">Global Stream</a>
+            <a id="id_nav_follower_stream" href="{% url 'follower_stream' %}">Follower Stream</a>
+            <a id="id_nav_profile" href="{% url 'profile' %}">My Profile</a>
+            <a id="id_nav_logout" href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div> 
+{% endblock %}
+
+{% block content %}
+    <div class="stream">
+        <p>Follower Stream</p>
+
+        <div class="post_text">
+            <i>Post by <a class="navlink" href="{% url 'follower' %}" id="id_post_profile_1">Billy Liu</a></i> - 
+            <span id="id_post_text_1">The quick brown fox jumps over the lazy dog.</span> -- 
+            <span id="id_post_date_time_1"><i>2/10/2019 9:11pm</i></span>
+        </div>
+
+        <div class="comment_text">
+            <i>Comment by <a class="navlink" href="{% url 'follower' %}" id="id_comment_profile_2">Shelly Huo</a></i> - 
+            <span id="id_comment_text_2">I like your post.</span> -- 
+            <span id="id_comment_date_time_2"><i>2/10/2019 9:22pm</i></span>
+        </div>
+
+        <form class="comment_box" method="post" action="{% url 'follower_stream' %}">
+            <label for="id_comment_text_1">Comment:</label>
+            <input id="id_comment_text_1" type="text" name="newcomment" value="">
+            {% csrf_token %}
+            <button class="navlink" id="id_comment_button_1" type="submit">Submit</button>
+        </form><br>
+
+        <div class="post_text">
+            <i>Post by <a class="navlink" href="{% url 'follower' %}" id="id_post_profile_3">Jeremy Clarkson</a></i> - 
+            <span id="id_post_text_3">Hammond you idiot!!!</span> -- 
+            <span id="id_post_date_time_3"><i>2/10/2019 9:29pm</i></span>
+        </div>
+
+        <form class="comment_box" method="post" action="{% url 'follower_stream' %}">
+            <label for="id_comment_text_3">Comment:</label>
+            <input id="id_comment_text_3" type="text" name="newcomment" value="">
+            {% csrf_token %}
+            <button class="navlink" id="id_comment_button_3" type="submit">Submit</button>
+        </form>   
+    </div>
+{% endblock %}

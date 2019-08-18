@@ -1,0 +1,85 @@
+{% extends "imagenation/base.html" %}
+
+{% load addcss %}
+
+{% block user-info %}
+    <a href="#" class="navbar-text" data-toggle="dropdown"> {{user.first_name}} {{user.last_name}} <b class="caret"></b></a>
+    <ul class="dropdown-menu">     
+        <li><a href="{% url 'upload_photo' %}"><span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+        <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+        <li><a href="{% url 'society' %}"><span class="glyphicon glyphicon-th-large"></span> ImageNation</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    {% load staticfiles %}
+    <script src="{% static 'imagenation/edit.js' %}" type="text/javascript"></script>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4 class="col">Tuned Photo</h4>
+            <canvas id="tuned_photo" class="img-thumbnail"></canvas><br>
+            <h4 class="col">Original Photo</h4>
+            <img src="{% url 'get_photo' photo.id %}" class="img-thumbnail" id="uploaded_photo" alt="uploaded_photo">
+        </div>
+
+        <div class="col-md-4">
+            <h3 class="col">Open Your Imagination...</h3>
+            <form method="post" action="{% url 'edit_photo' photo.id %}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <p>Upload another photo you want to edit:</p>
+                    <p>{{form.photo}}</p>
+                    <p><input id="upload_photo_button" type="submit" value="Upload Photo"></p>
+                </div>
+                {% csrf_token %}
+            </form>
+            <div class="span2">
+                <br><button type="submit" class="btn btn-warning btn-block" onclick="random()">Tired of Editing? Try Me!</button>
+                <br><button type="submit" class="btn btn-danger btn-block" onclick="aggressive_random()">Get Some Fun!</button>
+                <br><button type="submit" class="btn btn-info btn-block" onclick="reset()">Reset Filter</button>
+                <br><a type="submit" class="btn btn-primary btn-block" id="download" href="" download="tuned.jpeg">Download Photo</a>
+                <br><button type="submit" class="btn btn-primary btn-block" onclick="save_tuned({{photo.id}})">Save Photo Online</button>
+                <br><a type="submit" class="btn btn-primary btn-block" href="{% url 'send_email' photo.id %}">Send To Me</a>
+                <br>
+                <form method="post" action = "{% url 'edit_photo' photo.id %}">
+                    <div class="form-group">
+                        <p>Add Tag:</p>
+                        <input class="form-control" type="text" name="tag_input">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    {% csrf_token %}
+                </form>
+                {% if tags %}
+                <br>
+                    Tags:
+                    {% for tag in tags %}
+                        <a href="{% url 'tag' tag.id%}">#{{tag.tag}}</a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <h4 class="col">Tuning Options</h4>
+            <p>Brightness:</p>
+            <input type="range" min="50" max="150" value="100" class="slider" id="photo_brightness" onchange="filter()">
+            <p>Contrast:</p>
+            <input type="range" min="50" max="150" value="100" class="slider" id="photo_contrast" onchange="filter()">
+            <p>Grayscale:</p>
+            <input type="range" min="0" max="100" value="0" class="slider" id="photo_grayscale" onchange="filter()">
+            <p>Saturation:</p>
+            <input type="range" min="50" max="150" value="100" class="slider" id="photo_saturation" onchange="filter()">
+            <p>Opacity:</p>
+            <input type="range" min="0" max="100" value="100" class="slider" id="photo_opacity" onchange="filter()">
+            <p>Invert:</p>
+            <input type="range" min="0" max="100" value="0" class="slider" id="photo_invert" onchange="filter()">
+            <p>Blur:</p>
+            <input type="range" min="0" max="10" value="0" class="slider" id="photo_blur" onchange="filter()">
+            <p>Sepia:</p>
+            <input type="range" min="0" max="100" value="0" class="slider" id="photo_sepia" onchange="filter()">
+            <p>Color Wheel:</p>
+            <input type="range" min="0" max="360" value="0" class="slider" id="photo_hue_rotate" onchange="filter()">
+        </div>
+    </div>
+{% endblock %}

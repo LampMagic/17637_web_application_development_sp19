@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title> {% block title %} Social Network {% endblock %} </title>
+		{% load staticfiles %}
+		<link href="{% static 'socialnetwork/base.css' %}" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<div class="big-heading">
+			{% block heading %}
+			<span id="id_name_of_site">Blog Master</span>
+			{% endblock %}
+		</div>
+
+		<div class="user-info">
+			{% block user-info %}
+			{% endblock %}
+		</div>
+
+		{% if message %}
+			<div class="message">
+				{{message}}
+			</div>
+		{% endif %}
+
+		<div class="content">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

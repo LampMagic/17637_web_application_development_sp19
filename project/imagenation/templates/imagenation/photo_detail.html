@@ -1,0 +1,39 @@
+{% extends "imagenation/base.html" %}
+
+{% load addcss %}
+
+{% block user-info %}
+    <a href="#" class="navbar-text" data-toggle="dropdown"> {{user.first_name}} {{user.last_name}} <b class="caret"></b></a>
+    <ul class="dropdown-menu">     
+        <li><a href="{% url 'upload_photo' %}"><span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+        <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+        <li><a href="{% url 'society' %}"><span class="glyphicon glyphicon-th-large"></span> ImageNation</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class = "col-md-6">
+			<img class="img-thumbnail" src="{% url 'get_photo' photo.id %}" alt="Gallery Photo">
+		</div>
+
+		<div class = "col-md-6">
+			<h4>Owner: <a class='a_block' href="{% url 'other_user' photo.owner.id%}">{{photo.owner.first_name}} {{photo.owner.last_name}}</a></h4>
+			<h4>Created Time: {{photo.time}}</h4>
+			<h4>Likes: {{photo.likes}}</h4>
+			{% if tags %}
+				<h4>Tags:
+				{% for tag in tags %}
+					<a href="{% url 'tag' tag.id%}">#{{tag.tag}}</a>
+				{% endfor %}
+				</h4>
+			{% endif %}
+			<form method="post" action="{% url 'photo_detail' photo.id %}">
+				<button type="submit" class="btn btn-primary" name='like_btn' value ='click'>{{like_text}}</button>
+				{% csrf_token %}
+	   		</form>
+		</div>
+	</div>
+{% endblock %}
+

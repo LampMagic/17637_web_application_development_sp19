@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>calculator</title>
+		<link rel="stylesheet" type="text/css" href="css/calculator.css">
+		<script src="js/calculator.js"> </script>
+	</head>
+
+	<body>
+		<div>
+			<input type="text" readonly="readonly" id="calc-display" class="display" value="0" autocomplete="off">
+		</div>
+
+		<div>
+			<button id="calc-key-7" class="num_button" onclick="clickNum(7)">7</button><button id="calc-key-8" class="num_button" onclick="clickNum(8)">8</button><button id="calc-key-9" class="num_button" onclick="clickNum(9)">9</button><button id="calc-plus" class="ops_button" onclick="clickOps('+')">&plus;</button>
+		</div>
+		
+		<div>
+			<button id="calc-key-4" class="num_button" onclick="clickNum(4)">4</button><button id="calc-key-5" class="num_button" onclick="clickNum(5)">5</button><button id="calc-key-6" class="num_button" onclick="clickNum(6)">6</button><button id="calc-minus" class="ops_button" onclick="clickOps('-')">&minus;</button>
+		</div>
+
+		<div>
+			<button id="calc-key-1" class="num_button" onclick="clickNum(1)">1</button><button id="calc-key-2" class="num_button" onclick="clickNum(2)">2</button><button id="calc-key-3" class="num_button" onclick="clickNum(3)">3</button><button id="calc-times" class="ops_button" onclick="clickOps('*')">&times;</button>
+		</div>
+		
+		<div class="special">
+			<button id="calc-key-0" class="num_button" onclick="clickNum(0)">0</button><button id="calc-equals" class="ops_button" onclick="clickOps('=')">&equals;</button><button id="calc-divide" class="ops_button" onclick="clickOps('/')">&divide;</button>
+		</div>
+		
+	</body>
+</html>

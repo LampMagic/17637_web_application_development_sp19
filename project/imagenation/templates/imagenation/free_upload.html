@@ -1,0 +1,27 @@
+{% extends "imagenation/base.html" %}
+
+{% load addcss %}
+
+{% block user-info %}
+    <ul class="nav navbar-nav">
+        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}    
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h3 class="col">The Magic Begins Here...</h3>
+            <form method="post" action="{% url 'free_upload' %}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <p>Upload the photo you want to edit:</p>
+                    <p>{{form.photo}}</p>
+                    <p><input id="upload_photo_button" type="submit" value="Upload Photo"></p>
+                </div>
+                {% csrf_token %}
+            </form>            
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+{% endblock %}
